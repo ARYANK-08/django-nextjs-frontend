@@ -12,38 +12,48 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+import { FormEvent } from 'react';
+
+type AuthContextType = {
+  login: () => void;
+  // Add other auth methods as needed
+};
+
 export function LoginForm() {
   const LOGIN_URL = '/api/login/';
-
-  const auth = useAuth()
-  async function handleSubmit(event) {
   
-      event.preventDefault();
-      console.log(event, event.target);
+  const auth = useAuth() as unknown as AuthContextType;
 
-      const formData = new FormData(event.target);
-      const objectFromForm = Object.fromEntries(formData);
-      const jsonData = JSON.stringify(objectFromForm);
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const objectFromForm = Object.fromEntries(formData);
+    const jsonData = JSON.stringify(objectFromForm);
 
-      const requestOptions = {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: jsonData,
-      };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonData,
+    };
 
+    try {
       const response = await fetch(LOGIN_URL, requestOptions);
 
       if (response.ok) {
-          auth.login()
-          console.log("logged in")
+        auth.login();
+        console.log("logged in");
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
       }
-      else {
-        console.log(await response.json())
-      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   }
-
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
