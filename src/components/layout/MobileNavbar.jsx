@@ -12,7 +12,7 @@ import BrandLink from "./BrandLink"
 
 
 
-export default function MobileNavbar({className}) {
+export default function MobileNavbar({}) {
     const auth = useAuth()
     return   <Sheet>
     <SheetTrigger asChild>

@@ -8,6 +8,7 @@ import { Inter as FontSans } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "next-themes";
+import { Suspense } from "react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}
       >
+        <Suspense fallback={<div>Loading macha...</div>}>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -53,7 +55,7 @@ export default function RootLayout({
           </BaseLayout>
           </AuthProvider>
         </ThemeProvider>
-
+    </Suspense>
       </body>
     </html>
   );

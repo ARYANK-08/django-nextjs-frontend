@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getToken } from "../../lib/auth";
-import { headers } from "next/headers";
 import { DJANGO_API_ENDPOINT } from "../../../config/defaults";
 
 const DJANGO_API_WAITLIST_URL = `${DJANGO_API_ENDPOINT}/waitlist/`;

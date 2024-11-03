@@ -6,7 +6,6 @@ import {
     TableBody,
     TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -43,7 +42,7 @@ export default function WaitlistTable() {
         </TableHeader>
         <TableBody>
           {data.map((item, idx) => (
-            <TableRow className="hover:cursor-pointer" key={`item-${idx}`} onClick={e=>router.push(`/waitlist/${item.id}`)}>
+            <TableRow className="hover:cursor-pointer" key={`item-${idx}`} onClick={()=>router.push(`/waitlist/${item.id}`)}>
               <TableCell className="font-medium">{item.id}</TableCell>
               <TableCell className="font-medium">{item.email}</TableCell>
               <TableCell className="font-medium">{item.description}</TableCell>

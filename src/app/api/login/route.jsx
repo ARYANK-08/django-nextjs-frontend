@@ -1,8 +1,7 @@
 "use server";
 
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { getRefreshToken, setToken, getToken } from '../../lib/auth'; // Ensure setToken and getToken are imported
+import { setToken } from '../../lib/auth'; // Ensure setToken and getToken are imported
 import { DJANGO_API_ENDPOINT } from '../../../config/defaults';
 const DJANGO_API_LOGIN_URL = `${DJANGO_API_ENDPOINT}/token/pair`;
 
@@ -33,7 +32,7 @@ export async function POST(request) {
         console.log("Response Data:", responseData);
 
         // Make sure to destructure access and refresh correctly
-        const {username, access, refresh } = responseData; // Destructure from responseData
+        const {username, access } = responseData; // Destructure from responseData
 
         setToken(access);
         // Optionally, you may want to set the refresh token as well

@@ -1,7 +1,6 @@
 "use client"
 
-import Link from "next/link"
-import { CircleUser, Menu, Package2, Search } from "lucide-react"
+import { CircleUser } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -9,21 +8,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useAuth } from "../authProvider"
 
-import NavLinks, {NonUserLinks} from './NavLinks'
-import BrandLink from "./BrandLink"
-import MobileNavbar from "./MobileNavbar"
 import { useRouter } from "next/navigation"
 
 
 
-export default function AccountDropdown({className}) {
+export default function AccountDropdown({}) {
     const auth = useAuth()
     const router = useRouter()
 
@@ -36,7 +29,7 @@ export default function AccountDropdown({className}) {
     </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
         <DropdownMenuLabel>{auth.username? auth.username : "Account"}</DropdownMenuLabel>
-        <DropdownMenuItem onClick={e=> router.push('/logout')}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={()=> router.push('/logout')}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
 }
